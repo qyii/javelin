@@ -8,12 +8,22 @@ console.log('ok')
 module.exports = {
   mode: 'production',
   entry: {
-    index: './src/index.js',
-    home: './src/home.js'
+    index: './src/index.js'
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].[chunkhash:8].js'
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use:[
+          'style-loader',
+          'css-loader'
+        ]
+      }
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({

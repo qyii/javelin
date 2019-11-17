@@ -1,5 +1,0 @@
-console.log('this .is homo!!')
-const div = document.createElement('div')
-const text = document.createTextNode('hololive!')
-div.appendChild(text)
-document.body.appendChild(div)
