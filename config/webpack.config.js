@@ -1,6 +1,7 @@
 const path = require('path')
 const delDir = require('./del')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 delDir('./dist')
 console.log('ok')
@@ -19,7 +20,9 @@ module.exports = {
       {
         test: /\.css$/i,
         use:[
-          'style-loader',
+          {
+            loader: MiniCssExtractPlugin.loader
+          },
           'css-loader'
         ]
       }
@@ -29,6 +32,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'hololive',
       template: 'public/index.html'
+    }),
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // all options are optional
+      filename: '[name].[chunkhash:8].css',
+      chunkFilename: '[id].css',
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
     })
   ]
 }
