@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: '[name].[chunkhash:8].js'
+    filename: './js/[name].[chunkhash:8].js'
   },
   module: {
     rules: [
@@ -25,8 +25,19 @@ module.exports = {
           },
           'css-loader'
         ]
+      },
+      {
+        test: /\.less$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader'
+        ]
       }
     ]
+  },
+  devServer: {
+    port: 6234
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -36,7 +47,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // all options are optional
-      filename: '[name].[chunkhash:8].css',
+      filename: './style/[name].[chunkhash:8].css',
       chunkFilename: '[id].css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     })
